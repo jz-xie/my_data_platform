@@ -1,0 +1,1 @@
+<img src="./architecture.drawio.svg">
