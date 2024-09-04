@@ -1,0 +1,2 @@
+appName: cdc-test
+kubernetesAuthPath: kubernetes-data-dev

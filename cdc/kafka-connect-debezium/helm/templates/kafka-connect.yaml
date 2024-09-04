@@ -1,0 +1,64 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  name: kafka-connect-{{ .Values.appName }}
+  annotations:
+    strimzi.io/use-connector-resources: "true"
+spec:
+  replicas: 1
+  version: 3.1.0
+  image: {{ .Values.image }}
+  bootstrapServers: {{ .Values.kafkaBootstrapServers }}
+
+  resources:
+    requests:
+      cpu: 1
+      memory: 2Gi
+    limits:
+      cpu: 1
+      memory: 2Gi
+
+  config:
+    group.id: kafka-connect-{{ .Values.appName }}
+    offset.storage.topic: kafka-connect-offsets-{{ .Values.appName }}
+    config.storage.topic: kafka-connect-configs-{{ .Values.appName }}
+    status.storage.topic: kafka-connect-status-{{ .Values.appName }}
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    tasks.max:  1
+    config.storage.replication.factor: -1
+    offset.storage.replication.factor: -1
+    status.storage.replication.factor: -1
+
+    # File config provider https://docs.confluent.io/platform/current/connect/security.html#fileconfigprovider
+    config.providers: file
+    config.providers.file.class: org.apache.kafka.common.config.provider.FileConfigProvider
+  
+  externalConfiguration:
+    volumes:
+      - name: vault-whitelisted-service-account-token
+        secret:
+          secretName: {{ .Values.vaultServiceAccountSecretName }}
+          optional: false
+
+  template:
+    pod:
+      metadata:
+        annotations:
+          vault.hashicorp.com/agent-inject: true
+          vault.hashicorp.com/agent-configmap: vault-db-config-{{ .Values.appName }}
+          vault.hashicorp.com/service: {{ .Values.vaultAddress }}
+          vault.hashicorp.com/log-level: 'debug'
+          vault.hashicorp.com/agent-cache-enable: true
+
+          # Mount the vault-whitelisted-service-account-token to Vault agent container
+          vault.hashicorp.com/agent-copy-volume-mounts: kafka-connect-{{ .Values.appName }}-connect
+    serviceAccount:
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: {{ .Values.awsRoleARN }}
+
+  logging:
+    type: inline
+    loggers:
+      log4j.rootLogger: "INFO"

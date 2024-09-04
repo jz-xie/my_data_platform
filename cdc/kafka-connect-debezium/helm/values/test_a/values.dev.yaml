@@ -1,0 +1,7 @@
+vaultRole: data-dev-de-role
+vaultAddress: ""
+vaultSecretPath: ""
+
+vaultServiceAccountSecretName: ""
+databaseHost: ""
+kafkaBootstrapServers: ""

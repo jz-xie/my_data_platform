@@ -1,20 +1,37 @@
-<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="121px" height="61px" viewBox="-0.5 -0.5 121 61" content="&lt;mxfile&gt;&lt;diagram id=&quot;Y0RItX5xrPOu3WEPWdzG&quot; name=&quot;Page-1&quot;&gt;jZLBboQgEIafhrtCarfXutvupScPPROZCgmIYbFqn75YBtFsNumFwDf/wMzPEFab+d3xQX5YAZrQQsyEnQml1akK6woWBBWCzikRUZlBo34AYYF0VAJuB6G3Vns1HGFr+x5af2DcOTsdZV9WH18deAd3oGm5vqefSngZ6Yk+Z34F1cn0clm9xIjhSYyd3CQXdtohdiGsdtb6uDNzDXr1LvkS894eRLfCHPT+Pwk0JnxzPWJv1yAIFdHirHjnuME6/ZKad3bsBaz5JWGvk1QemoG3a3QKvx2Y9EZjGK8H52F+WGK5NR4GBqwB75YgwQRaoFc4LPQJz1O2vkx+yp3tFTKOv91tV2dDwgY9Scfs/V9sN8Ds8gs=&lt;/diagram&gt;&lt;/mxfile&gt;">
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="91px" height="141px" viewBox="-0.5 -0.5 91 141" content="&lt;mxfile&gt;&lt;diagram id=&quot;Y0RItX5xrPOu3WEPWdzG&quot; name=&quot;Page-1&quot;&gt;zZM9b8MgEIZ/DXuApGnG1k3aDlEHD52RuRgkbCyCa7u/vricv+RG6tChi4WfuxfuXg7Ck6J9dqJSZyvBELaRLeFPhLHtfhe+Pegi2FEWQe60jIhOINWfgHCDtNYSrotEb63xulrCzJYlZH7BhHO2WaZdrFmeWokcViDNhFnTdy29ivSe7Sf+AjpXw8n07hAjhRiSsZOrEtI2M8SPhCfOWh9XRZuA6b0bfIm6043oWJiD0v9GgL5/CFNjb2ddvr4FQcqxQt8NbTtblxJ6JSX8sVHaQ1qJrI824Z4DU74wGMaNwXlobxZHx5bDqIAtwLsupKCAs22U4JhQjq41k+kHRGrm9w6ZwGvOx50nJ8ICzfjZGL4y5kG7iwl39d9cGWfp710Jv9Mofsdm75kfvwA=&lt;/diagram&gt;&lt;/mxfile&gt;">
     <defs/>
     <g>
-        <rect x="0" y="0" width="120" height="60" rx="9" ry="9" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <rect x="0" y="0" width="90" height="50" rx="7.5" ry="7.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 30px; margin-left: 1px;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 88px; height: 1px; padding-top: 25px; margin-left: 1px;">
                         <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
                             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                Hellow Diagram
+                                MinIO/S3
                             </div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="60" y="34" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    Hellow Diagram
+                <text x="45" y="29" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    MinIO/S3
+                </text>
+            </switch>
+        </g>
+        <rect x="0" y="90" width="90" height="50" rx="7.5" ry="7.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 88px; height: 1px; padding-top: 115px; margin-left: 1px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Airflow
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="45" y="119" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Airflow
                 </text>
             </switch>
         </g>

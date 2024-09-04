@@ -1,0 +1,54 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: debezium-connector-{{ .Values.appName }}
+  labels:
+    strimzi.io/cluster: kafka-connect-{{ .Values.appName }}
+spec:
+  class: io.debezium.connector.mysql.MySqlConnector
+  tasksMax: 1
+  autoRestart:
+    enabled: true
+
+  config:
+  # https://debezium.io/documentation/reference/stable/connectors/mysql.html#_required_debezium_mysql_connector_configuration_properties
+    tasks.max: 1
+
+    # Excluding schema in records 
+    key.converter.schemas.enable: false
+    value.converter.schemas.enable: false
+
+    # AWS IAM Config 
+    database.history.consumer.sasl.client.callback.handler.class: software.amazon.msk.auth.iam.IAMClientCallbackHandler
+    database.history.consumer.sasl.jaas.config: software.amazon.msk.auth.iam.IAMLoginModule required;
+    database.history.consumer.sasl.mechanism: AWS_MSK_IAM
+    database.history.consumer.security.protocol: SASL_SSL
+    database.history.producer.sasl.client.callback.handler.class: software.amazon.msk.auth.iam.IAMClientCallbackHandler
+    database.history.producer.sasl.jaas.config: software.amazon.msk.auth.iam.IAMLoginModule required;
+    database.history.producer.sasl.mechanism: AWS_MSK_IAM
+    database.history.producer.security.protocol: SASL_SSL
+
+    schema.history.internal.consumer.sasl.client.callback.handler.class: software.amazon.msk.auth.iam.IAMClientCallbackHandler
+    schema.history.internal.consumer.sasl.jaas.config: software.amazon.msk.auth.iam.IAMLoginModule required;
+    schema.history.internal.consumer.sasl.mechanism: AWS_MSK_IAM
+    schema.history.internal.consumer.security.protocol: SASL_SSL
+    schema.history.internal.producer.sasl.client.callback.handler.class: software.amazon.msk.auth.iam.IAMClientCallbackHandler
+    schema.history.internal.producer.sasl.jaas.config: software.amazon.msk.auth.iam.IAMLoginModule required;
+    schema.history.internal.producer.sasl.mechanism: AWS_MSK_IAM
+    schema.history.internal.producer.security.protocol: SASL_SSL
+
+    schema.history.internal.kafka.bootstrap.servers: {{ .Values.kafkaBootstrapServers }}
+    schema.history.internal.kafka.topic: schemahistory.{{ .Values.appName }}
+
+    database.server.id: 18402
+    database.hostname: {{ .Values.databaseHost }}
+    database.port: 3306
+    database.user: ${file:/vault/secrets/db-secrets.properties:user}
+    database.password: ${file:/vault/secrets/db-secrets.properties:password}
+
+    include.schema.changes: true
+    snapshot.locking.mode: none
+
+    topic.prefix: {{ .Values.topicPrefix | default "" }} 
+    database.include.list: {{ .Values.databaseIncludeList | default "*" }}
+    table.include.list: {{ .Values.tableIncludeList | default "*" }}

@@ -1,0 +1,51 @@
+# https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples#configmap-example
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-db-config-{{ .Values.appName }}
+data:
+  config.hcl: |
+    exit_after_auth = false
+
+    auto_auth {
+      method "kubernetes" {
+        mount_path = "auth/{{ .Values.kubernetesAuthPath }}"
+        config = {
+          role = "{{ .Values.vaultRole }}"
+          token_path = "/opt/kafka/external-configuration/vault-whitelisted-service-account-token/token"
+        }
+        }
+    }
+
+    template {
+      destination = "/vault/secrets/db-secrets.properties"
+      contents = <<EOT
+      {{"{{-"}} with secret "{{ .Values.vaultSecretPath }}" {{"-}}"}}
+      user={{"{{"}} .Data.username {{"}}"}}
+      password={{"{{"}} .Data.password {{"}}"}}
+      {{"{{-"}} end {{"-}}"}}
+      EOT
+    }
+
+  config-init.hcl: |
+    exit_after_auth = true
+
+    auto_auth {
+      method "kubernetes" {
+        mount_path = "auth/{{ .Values.kubernetesAuthPath }}"
+        config = {
+          role = "{{ .Values.vaultRole }}"
+          token_path = "/opt/kafka/external-configuration/vault-whitelisted-service-account-token/token"
+        }
+        }
+    }
+
+    template {
+      destination = "/vault/secrets/db-secrets.properties"
+      contents = <<EOT
+      {{"{{"}} with secret "{{ .Values.vaultSecretPath }}" {{"}}"}}
+          user={{"{{"}} .Data.username {{"}}"}}
+          password={{"{{"}} .Data.password {{"}}"}}
+      {{"{{"}} end {{"}}"}}
+      EOT
+    }

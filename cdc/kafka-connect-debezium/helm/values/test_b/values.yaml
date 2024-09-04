@@ -1,0 +1,2 @@
+appName: cdc-test
+kafkaBootstrapServers: my-cluster-kafka-bootstrap:9092
