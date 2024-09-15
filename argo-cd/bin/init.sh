@@ -4,10 +4,12 @@
 # kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 # kafka operator
-kubectl create namespace kafka
-kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+kubectl create namespace kafka-operator
+helm repo add strimzi https://strimzi.io/charts/
+helm install strimzi-kafka-operator strimzi/strimzi-kafka-operator -n kafka-operator --create-namespace  -f kafka-operator/values.yaml
 
 # kafka cluster
+kubectl create namespace kafka
 kubectl apply -f https://strimzi.io/examples/latest/kafka/kafka-persistent-single.yaml -n kafka
 
 # mysql
