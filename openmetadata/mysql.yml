@@ -1,0 +1,16 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    # tag: 8.4.5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+    # (this is just an example, not intended to be a production configuration)
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"

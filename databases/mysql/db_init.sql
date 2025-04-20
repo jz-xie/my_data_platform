@@ -1,5 +1,5 @@
-CREATE DATABASE cdc;
-USE cdc;
+CREATE DATABASE public;
+USE public;
 CREATE TABLE person (person_id int, person_name varchar(255));
 INSERT INTO person (person_id, person_name)
 VALUES (1, 'a');
